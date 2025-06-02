@@ -6,12 +6,16 @@ import "./App.css";
 import TaskList from "./components/TaskList";
 import TaskModal from "./components/TaskModal";
 import StatusChart from "./components/StatusChart";
+import ConfirmModal from "./components/ConfirmMordal";
 
 function App() {
   // ===== Estados principais =====
   const [tarefas, setTarefas] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingTarefa, setEditingTarefa] = useState(null);
+
+  // ===== Estado para modal de confirmação de exclusão =====
+  const [tarefaParaExcluir, setTarefaParaExcluir] = useState(null);
 
   // ===== Estados de filtro =====
   const [filtroTexto, setFiltroTexto] = useState("");
@@ -57,13 +61,18 @@ function App() {
     setEditingTarefa(null);
   };
 
-  // ===== Função para excluir tarefa =====
-  const excluirTarefa = async (id) => {
+  // ===== Função que realmente exclui a tarefa no backend =====
+  const confirmarExclusao = async () => {
+    if (!tarefaParaExcluir) return;
     try {
-      await axios.delete(`/tarefas/${id}`);
-      setTarefas((old) => old.filter((t) => t.id !== id));
+      await axios.delete(`/tarefas/${tarefaParaExcluir.id}`);
+      setTarefas((old) =>
+        old.filter((t) => t.id !== tarefaParaExcluir.id)
+      );
     } catch (err) {
       console.error("Erro ao excluir tarefa:", err);
+    } finally {
+      setTarefaParaExcluir(null);
     }
   };
 
@@ -151,7 +160,7 @@ function App() {
           <TaskList
             tarefas={tarefasFiltradas}
             onEdit={abrirEdicao}
-            onDelete={excluirTarefa}
+            onRequestDelete={(tarefa) => setTarefaParaExcluir(tarefa)}
           />
         </div>
 
@@ -171,6 +180,18 @@ function App() {
         }}
         onSubmit={salvarTarefa}
         initialData={editingTarefa}
+      />
+
+      {/* ==== ConfirmModal para exclusão ==== */}
+      <ConfirmModal
+        isOpen={!!tarefaParaExcluir}
+        message={
+          tarefaParaExcluir
+            ? `Tem certeza que deseja excluir "${tarefaParaExcluir.titulo}"?`
+            : ""
+        }
+        onConfirm={confirmarExclusao}
+        onCancel={() => setTarefaParaExcluir(null)}
       />
     </>
   );

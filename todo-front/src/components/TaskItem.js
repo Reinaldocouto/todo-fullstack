@@ -1,14 +1,18 @@
 // src/components/TaskItem.js
 import React from "react";
 
-// função auxiliar para “normalizar” o status em nome de classe
+// Converte texto “Em Progresso” → “em-progresso” para classes
 const toClass = (str) =>
-  str.toLowerCase().replace(/\s+/g, "-").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  str
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
-export default function TaskItem({ tarefa, onEdit, onDelete }) {
+export default function TaskItem({ tarefa, onEdit, onRequestDelete }) {
   const statusClass = `status-${toClass(tarefa.status)}`;
 
-  // formatação de data (como antes)
+  // formata data/hora
   const dt = new Date(tarefa.datacriacao);
   const dataFormatada = dt.toLocaleDateString("pt-BR", {
     day: "2-digit",
@@ -34,17 +38,12 @@ export default function TaskItem({ tarefa, onEdit, onDelete }) {
           Editar
         </button>
         <button
-  className="secondary"
-  onClick={() => {
-    if (window.confirm("Tem certeza que deseja excluir esta tarefa?")) {
-      onDelete(tarefa.id);
-    }
-  }}
-  style={{ marginLeft: 8 }}
->
-  Excluir
-</button>
-
+          className="secondary"
+          onClick={() => onRequestDelete(tarefa)}
+          style={{ marginLeft: 8 }}
+        >
+          Excluir
+        </button>
       </div>
     </li>
   );

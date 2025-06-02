@@ -2,7 +2,7 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 
-export default function TaskList({ tarefas, onEdit, onDelete }) {
+export default function TaskList({ tarefas, onEdit, onRequestDelete }) {
   if (tarefas.length === 0) {
     return <p>Sem tarefas cadastradas.</p>;
   }
@@ -14,7 +14,7 @@ export default function TaskList({ tarefas, onEdit, onDelete }) {
           key={t.id}
           tarefa={t}
           onEdit={onEdit}
-          onDelete={onDelete}
+          onRequestDelete={onRequestDelete}
         />
       ))}
     </ul>
