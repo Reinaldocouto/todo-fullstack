@@ -1,0 +1,254 @@
+/* src/App.css */
+:root {
+  --primary-dark: #1f3a93;      /* azul escuro */
+  --primary-light: #e9eef5;     /* fundo claro */
+  --accent: #007bff;            /* azul de destaque */
+  --text-dark: #343a40;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: var(--primary-light);
+  color: var(--text-dark);
+}
+
+header {
+  background-color: var(--primary-dark);
+  color: var(--white);
+  padding: 16px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.task-container {
+  max-width: 700px;
+  margin: 24px auto;
+  background-color: var(--white);
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-color: var(--white);
+  border-radius: 6px;
+  max-width: 500px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-body input,
+.modal-body select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-footer {
+  text-align: right;
+}
+
+button {
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+button.primary {
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 8px 14px;
+}
+
+button.secondary {
+  background-color: #6c757d;
+  color: var(--white);
+  padding: 6px 12px;
+  margin-left: 8px;
+}
+
+.task-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.task-details {
+  max-width: 80%;
+}
+
+.task-details strong {
+  font-size: 1.1rem;
+}
+
+.task-details p {
+  margin: 4px 0 0;
+  color: #555;
+}
+
+/* estilo base do card */
+.task-card {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* cores pastel para cada status */
+.status-pendente {
+  background-color: #fff3cd; /* amarelo claro */
+}
+
+.status-concluida {
+  background-color: #d4edda; /* verde claro */
+}
+
+.status-em-progresso {
+  background-color: #cce5ff; /* azul claro */
+}
+
+.status-cancelada {
+  background-color: #f8d7da; /* vermelho claro */
+}
+
+.status-aguardando {
+  background-color: #e2e3e5; /* cinza claro */
+}
+
+/* detalhes dentro do card */
+.task-details {
+  max-width: 75%;
+}
+
+.task-details strong {
+  font-size: 1.1rem;
+}
+
+.task-details p {
+  margin: 4px 0 4px;
+  color: #555;
+}
+
+.task-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* ações (botões) alinhados à direita */
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* botões continuam os mesmos ou ajuste cores conforme precisar */
+.secondary {
+  background-color: #6c757d;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* exemplo, botão “Concluir” pode usar cor diferente se quiser */
+.primary-action {
+  background-color: #007bff;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+  
+}
+
+.task-container {
+  flex: 1 1 400px; /* lista ocupa espaço maior */
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+  flex: 0 0 25%;        /* largura fixa de 250px */
+  max-width: 25%;       /* garante que não estique além disso */
+  background-color: #fff;
+  padding: 26px;
+  border-radius: 106px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;         /* altura fixa de 250px */
+  margin-right: 10%;
+  margin-top: 24px;
+}
+
+.task-container > button {
+  margin-bottom: 12px; /* ou o valor que achar melhor */
+}
